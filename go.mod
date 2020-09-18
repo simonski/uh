@@ -1,4 +1,4 @@
-module uh
+module github.com/simonski/uh
 
 go 1.14
 
