@@ -11,5 +11,5 @@ CLI back-and-forth go trialling stuff
 
 ## running
 
-    uh
+    ./uh prob -bins 1,2.4,3.4,4.9,11
 

@@ -46,6 +46,8 @@ func main() {
 type Bin struct {
 	Probability float64
 	Count       int
+	LowerBound 	float64
+	UpperBound  float64
 }
 
 func probbin(cli goutils.CLI) {
@@ -68,10 +70,23 @@ func probbin(cli goutils.CLI) {
 	binsRequired := cli.SplitStringToFloats(binsRequiredStr, ",")
 	remainder := float64(100)
 	bins := make([]Bin, len(binsRequired))
+	lower := 0.0
+	upper := 0.0
 	for index := 0; index < len(bins); index++ {
 		// create each bin and put it in our slice
 		probability := binsRequired[index]
-		bin := Bin{probability, 0}
+		lower = upper
+		upper += probability
+
+		if index == 0 {
+			lower = 0
+			upper = probability
+		} else {
+			lower = bins[index-1].UpperBound
+			upper = lower + probability
+		}
+
+		bin := Bin{probability, 0, lower, upper}
 		bins[index] = bin
 		remainder -= probability
 		if remainder < 0 {
@@ -80,7 +95,8 @@ func probbin(cli goutils.CLI) {
 		}
 	}
 	if remainder > 0 {
-		bin := Bin{remainder, 0}
+		lastBin := bins[len(bins)-1]
+		bin := Bin{remainder, 0, lastBin.UpperBound, 100.0}
 		bins = append(bins, bin)
 	}
 
@@ -88,7 +104,25 @@ func probbin(cli goutils.CLI) {
 	totalRows := cli.GetIntOrDefault("-count", 1) * 1000000
 
 	for row := 0; row < totalRows; row++ {
+
+		// v is the random value we are going to assign to a bin
 		v := random.Float64() * 100
+
+		// this is the naive o(n) solution
+
+		// in this solution I wind up in order over the bins - the first
+		// I sum the probabilities of the bins; if v is less than the current
+		// sum of probabilities, it sits in the range given to the bin and 
+		// is allocated to it
+
+		// for starters this gives me o(n) as worst case I 
+		// walk over each bin to get the correct one - so this is wrong
+
+		// I think there should be a bins.GetNeatestBin(value) which 
+		// give sme the correct bin
+		// the reason this works is that I am staacking the bins so
+		// the size of the bin is irrelevant; it accepts a value in a range
+		// that is equal to its size
 		total := 0.0
 		for index := 0; index < len(bins); index++ {
 			total += bins[index].Probability
@@ -106,7 +140,7 @@ func probbin(cli goutils.CLI) {
 		bin := bins[index]
 		binPct := pct * float64(bin.Count)
 		difference := bin.Probability - binPct
-		fmt.Printf("Bin[%d] requested %.2f pct, received %d hits, achieved %.3f pct, difference %.3f pct\n", index, bin.Probability, bin.Count, binPct, difference)
+		fmt.Printf("Bin[%d] requested %.2f pct, (lower %.2f/upper %.2f), received %d hits, achieved %.3f pct, difference %.3f pct\n", index, bin.Probability, bin.LowerBound, bin.UpperBound, bin.Count, binPct, difference)
 	}
 	fmt.Println("")
 
