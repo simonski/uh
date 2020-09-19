@@ -92,8 +92,8 @@ github.com/pkg/errors v0.9.1/go.mod h1:bwawxfHBFNV+L2hUp1rHADufV3IMtnDRdf1r5NINE
 github.com/pmezard/go-difflib v1.0.0/go.mod h1:iKH77koFhYxTK1pcRnkKkqfTogsbg7gZNVY4sRDYZ/4=
 github.com/prometheus/client_model v0.0.0-20190812154241-14fe0d1b01d4/go.mod h1:xMI15A0UPsDsEKsMN9yxemIoYk6Tm2C1GtYGdfGttqA=
 github.com/rogpeppe/go-internal v1.3.0/go.mod h1:M8bDsm7K2OlrFYOpmOWEs/qY81heoFRclV5y23lUDJ4=
-github.com/simonski/goutils v0.0.0-20200918140358-0e1200874470 h1:O1XdUFJ06oT5if7xh58QyMdrSDbFDb0Ic/29VcHQLaA=
-github.com/simonski/goutils v0.0.0-20200918140358-0e1200874470/go.mod h1:b/BH+DrE1JD0qAArrusUMYJYoZviI/NvpG8ellh7uuc=
+github.com/simonski/goutils v0.0.0-20200919073148-c158fc65f6db h1:D2UFgPqk/tlvy1SdjewaXfolrsBApoue0a5CAibl19A=
+github.com/simonski/goutils v0.0.0-20200919073148-c158fc65f6db/go.mod h1:b/BH+DrE1JD0qAArrusUMYJYoZviI/NvpG8ellh7uuc=
 github.com/spf13/afero v1.2.2/go.mod h1:9ZxEEn6pIJ8Rxe320qSDBk6AsU0r9pR7Q4OcevTdifk=
 github.com/stretchr/objx v0.1.0/go.mod h1:HFkY916IF+rwdDfMAkV7OtwuqBVzrE8GR6GFx+wExME=
 github.com/stretchr/testify v1.2.2/go.mod h1:a8OnRcib4nhh0OaRAV+Yts87kKdq0PP7pXfy6kDkUVs=
