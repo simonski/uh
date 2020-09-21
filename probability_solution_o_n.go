@@ -24,7 +24,7 @@ func probability_solution_o_n(cli goutils.CLI) {
 
 	binsRequiredStr := cli.GetStringOrDie("-bins")
 	binsRequired := cli.SplitStringToFloats(binsRequiredStr, ",")
-	bins := NewBinSearch(binsRequired)
+	bins := goutils.NewProbabilityStore(binsRequired)
 
 	// number of allocations in millions
 	totalRows := cli.GetIntOrDefault("-count", 1) * 1000000
@@ -53,9 +53,9 @@ func probability_solution_o_n(cli goutils.CLI) {
 		increment := false
 		for index := 0; index < bins.Length(); index++ {
 			bins.CallCount += 1
-			total += bins.bins[index].Probability
+			total += bins.Bins[index].Probability
 			if v < total {
-				bins.bins[index].Count += 1
+				bins.Bins[index].Count += 1
 				increment = true
 				break
 			}
