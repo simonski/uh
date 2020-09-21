@@ -50,12 +50,6 @@ func (bins BinSearch) Debug (totalRows int) {
 	fmt.Println("")
 }
 
-// IndexOf return the position in the array of the Bin that 
-// serves the value or -1 if it does not exist
-func (b *BinSearch) Indexof (value float64) int {
-	index := b.BinarySearch(value, b.bins)
-	return index
-}
 
 func (b BinSearch) Length () int {
 	return len(b.bins)
@@ -70,6 +64,13 @@ func (b BinSearch) Length () int {
 // 	} else {
 // 		return b.bins[0], errors.New("Nope")
 // 	}
+// }
+
+// IndexOf return the position in the array of the Bin that 
+// serves the value or -1 if it does not exist
+// func (b *BinSearch) Indexof (value float64) int {
+// 	index := b.BinarySearch(value, b.bins)
+// 	return index
 // }
 
 func (b *BinSearch) BinarySearch(value float64, bins []*Bin) int {

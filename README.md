@@ -23,6 +23,7 @@ Run using `./uk prob <options>`
 
 `-count 5` specifies (in millions) the number of iterations
 
+`-cores N` specifies the number of cores to run on
 
     ./uh prob -bins 1,2.4,3.4,4.9,11 -type o_log_n
 
@@ -30,3 +31,16 @@ To run using o(n)
 
     ./u prob -bins  1,2.4,3.4,4.9,11 -type o_n
 
+
+# Profiling
+
+    ./uh prob -bins 1,2,3,4,5,5,4,3,2,1,1,1,1,22,11,8,0.4,0.2,1.5,0.006,0.01 -type o_log_n  -count 1000 -v -profile o_log_n.prof
+
+    ./uh prob -bins 1,2,3,4,5,5,4,3,2,1,1,1,1,22,11,8,0.4,0.2,1.5,0.006,0.01 -type o_n  -count 1000 -v -profile o_n.prof
+
+
+    go tool pprof uh o_log_n.prof
+    top10
+
+    go tool pprof uh o_n.prof
+    top10

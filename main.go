@@ -3,6 +3,8 @@ package main
 import (
 	"fmt"
 	"os"
+	"log"
+	"runtime/pprof"
 	goutils "github.com/simonski/goutils"
 )
 
@@ -24,7 +26,21 @@ func usage() {
 }
 
 func main() {
+
 	cli := goutils.CLI{os.Args}
+
+	if cli.IndexOf("-profile") > -1 {
+	// flag.Parse()
+    // if *cpuprofile != "" {
+		profile := cli.GetStringOrDefault("-profile", "profile.data")
+        f, err := os.Create(profile)
+        if err != nil {
+            log.Fatal(err)
+        }
+        pprof.StartCPUProfile(f)
+        defer pprof.StopCPUProfile()
+	}
+	
 	if len(os.Args) < 2 {
 		usage()
 	} else {

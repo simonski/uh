@@ -34,7 +34,10 @@ func probability_solution_o_log_n(cli goutils.CLI) {
 		// v is the random value we are going to assign to a bin
 		v := random.Float64() * 100
 
-		index := bins.Indexof(v)
+		// index := bins.Indexof(v)
+
+		index := bins.BinarySearch(v, bins.bins)
+
 		bin := bins.bins[index]
 		bin.Count += 1
 
