@@ -41,11 +41,11 @@ Run using `/uh prob <options>`
 
 So put together the command is
 
-    uh prob -bins 1,2.4,3.4,4.9,11 -type o_log_n -v
+    uh prob -bins 1,2.4,3.4,4.9,11 -count 5 -type o_log_n -v
 
 To run using o(n)
 
-    u prob -bins  1,2.4,3.4,4.9,11 -type o_n -v
+    uh prob -bins 1,2.4,3.4,4.9,11 -count 5 -type o_n -v
 
 >Note: `-v` verbose, prints to STDOUT
 
