@@ -1,12 +1,17 @@
 # uh
-CLI back-and-forth go trialling stuff
+
+A CLI wrapper written in go that allows me to test bits of code, functions etc.
 
 ## installation
 
-    go get github.com/simonski/uh
+    go install github.com/simonski/uh
 
-## building
+## installation (code)
 
+Alternatively download and build it locally
+
+    git clone https://github.com/simonski/uh.git
+    cd uh
     go build
 
 ## running
@@ -15,7 +20,7 @@ CLI back-and-forth go trialling stuff
 
 This example allocates to a bin based on a probability.  
 
-Run using `./uk prob <options>`
+Run using `/uh prob <options>`
 
 `-bins 1,2,3,4,5` will create 5 bins witha probability of 1%, 2%, 3%, 4%, 5% of allocation - any remainder goes into a sixth bin.
 

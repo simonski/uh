@@ -46,7 +46,7 @@ func probability_solution_o_n(cli goutils.CLI) {
 
 		// I think there should be a bins.GetNeatestBin(value) which 
 		// give sme the correct bin
-		// the reason this works is that I am staacking the bins so
+		// the reason this works is that I am stacking the bins so
 		// the size of the bin is irrelevant; it accepts a value in a range
 		// that is equal to its size
 		total := 0.0
