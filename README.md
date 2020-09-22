@@ -2,11 +2,16 @@
 
 A CLI wrapper written in go that allows me to test bits of code, functions etc.
 
-## installation
+## Installation
+
+Assuming `$GOPATH/bin` is on your `$PATH`
+
 
     go install github.com/simonski/uh
 
-## installation (code)
+Will make the `uh` commmand generally available.
+
+## Installation (code)
 
 Alternatively download and build it locally
 
@@ -14,15 +19,17 @@ Alternatively download and build it locally
     cd uh
     go build
 
-## running
+## Running
+
+Generally you type `uh` and something will happen. Currently I only have one function of value, the probability store I am working on.
 
 ### Probability/Binning example
 
-This example allocates to a bin based on a probability.  
+This example allocates to a bin based on a probability.  It will be used as part of a semi-random data generation tool but for the moment the code is just scratch work.
 
 Run using `/uh prob <options>`
 
-`-bins 1,2,3,4,5` will create 5 bins witha probability of 1%, 2%, 3%, 4%, 5% of allocation - any remainder goes into a sixth bin.
+`-bins 1,2,3,4,5` will create 5 bins with a probability of 1%, 2%, 3%, 4%, 5% of allocation - any remainder goes into a sixth bin.
 
 `-type o_log_n` or `-type o_n` chooses the search method
 
@@ -30,17 +37,27 @@ Run using `/uh prob <options>`
 
 `-cores N` specifies the number of cores to run on
 
-    ./uh prob -bins 1,2.4,3.4,4.9,11 -type o_log_n
+So put together the command is
+
+    ./uh prob -bins 1,2.4,3.4,4.9,11 -type o_log_n -v
 
 To run using o(n)
 
-    ./u prob -bins  1,2.4,3.4,4.9,11 -type o_n
+    ./u prob -bins  1,2.4,3.4,4.9,11 -type o_n -v
+
+>Note: `-v` verbose, prints to STDOUT
 
 # Profiling
 
-    https://golang.org/pkg/runtime/pprof/
+Now I start profiling it to see the differences between the o(n) and o(log n) implementations.
+
+https://golang.org/pkg/runtime/pprof/
+
+First, run the o_log_n approach
 
     ./uh prob -bins 1,2,3,4,5,5,4,3,2,1,1,1,1,22,11,8,0.4,0.2,1.5,0.006,0.01 -type o_log_n  -count 1000 -v -profile o_log_n.prof
+
+Next run the o(n)
 
     ./uh prob -bins 1,2,3,4,5,5,4,3,2,1,1,1,1,22,11,8,0.4,0.2,1.5,0.006,0.01 -type o_n  -count 1000 -v -profile o_n.prof
 
@@ -50,10 +67,3 @@ To run using o(n)
     go tool pprof uh o_n.prof
     top10
 
-# TODO
-
-Put go benchmark profiling in place using a test that basically runs the above.
-
-See https://golang.org/pkg/runtime/pprof/
-
-    go test -cpuprofile cpu.prof -memprofile mem.prof -bench .
