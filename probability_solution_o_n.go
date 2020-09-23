@@ -21,9 +21,11 @@ func probability_solution_o_n(cli goutils.CLI) {
 	*/
 	seed := cli.GetIntOrDefault("-seed", 1)
 	random := rand.New(rand.NewSource(int64(seed)))
-
-	binsRequiredStr := cli.GetStringOrDie("-bins")
-	binsRequired := cli.SplitStringToFloats(binsRequiredStr, ",")
+	n := cli.GetIntOrDefault("-n", 100)
+	binsRequired := make([]float64, n)
+	for index :=0; index<n; index++ {
+		binsRequired[index] = float64(100.0/float64(n))
+	}
 	bins := goutils.NewProbabilityStore(binsRequired)
 
 	// number of allocations in millions
