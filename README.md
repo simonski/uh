@@ -6,7 +6,7 @@ A CLI wrapper written in go that allows me to test bits of code, functions etc.
 
 Assuming `$GOPATH/bin` is on your `$PATH`
 
-
+    go get github.com/simonski/uh
     go install github.com/simonski/uh
 
 Will make the `uh` commmand generally available.
